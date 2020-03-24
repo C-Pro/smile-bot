@@ -439,10 +439,10 @@ def is_avatar_has_mask(img: bytearray, user: User, context: CallbackContext) -> 
     try:
         is_good = container_predict(img, hash_)
 
-        if cache_key not in context.chat_data.keys():
-            context.chat_data[cache_key] = {}
+        if cache_key not in context.bot_data.keys():
+            context.bot_data[cache_key] = {}
 
-        context.chat_data[cache_key][hash_] = is_good
+        context.bot_data[cache_key][hash_] = is_good
         message = f"User {user.full_name} {'has' if is_good else 'does not have'} mask on"
         context.bot.send_message(get_group_chat_id(), message)
         return is_good
